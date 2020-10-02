@@ -6,6 +6,8 @@ import Row from "react-bootstrap/Row";
 import BooksNavbar from "./components/books_navbar/BooksNavbar";
 import Account from "./components/account/Account";
 import Books from "./components/books/Books";
+import BookDetails from "./components/book_details/BookDetails";
+
 export interface bookType{
 id: number;
 title: string;
@@ -46,7 +48,7 @@ const App: React.FC<AppProps> = (props) => {
 								<Container fluid className={'d-flex justify-content-center bg-color min-vh-100 p-0'}>
 									<Row className={'justify-content-center align-items-center w-100 p-0 mb-0 mx-0 mt-5'}>
 										<Col xl={7} lg={8} md={9} sm={10} xs={11}>
-											<Account authType={path === '/login'} history={props.history} location={props.location} match={props.match}/>
+											<BookDetails history={props.history} location={props.location} match={props.match}/>
 										</Col>
 									</Row>
 								</Container>

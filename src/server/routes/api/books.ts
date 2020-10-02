@@ -74,6 +74,7 @@ router.put('/post', checkRole, async (req, res,next) => {
     try{
         const bookDetails: any = await req.body;
         const book: any = await DB.Books.CreateBook(bookDetails);
+        console.log({book});
         res.json(book);
     }
     catch (e) {

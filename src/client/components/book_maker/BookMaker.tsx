@@ -18,7 +18,7 @@ return(
         <Card.Title className={'text-monospace mb-1'}>{props.book.title}</Card.Title>
         <Card.Text className={'mb-1 small'}><em>By: {props.book.author}</em></Card.Text>
         <Badge pill variant="dark" className={'mb-1 shadow-sm'}>{props.book.name}</Badge>
-        <Card.Text className={'small'}><b>${props.book.price}</b></Card.Text>
+        <Card.Text className={'small'}><b>${Number(props.book.price).toFixed(2)}</b></Card.Text>
     </Card.Body>
     <Card.Footer className={`d-flex ${props.match.params.id ? 'justify-content-between' : 'justify-content-center'}` }>
         {props.match.params.id ?
@@ -34,7 +34,7 @@ return(
                     }
                 }
                 }>Delete Books</Button>
-                <Link className={'shadow-sm btn btn-secondary'} to={`/books/$props.book.id}/update`}>
+                <Link className={'shadow-sm btn btn-secondary'} to={`/books/${props.book.id}/update`}>
                     Update Book
                 </Link>
             </>
