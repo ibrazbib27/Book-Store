@@ -70,12 +70,10 @@ router.put('/:id/book', checkRole, async (req, res,next) => {
     }
 });
 
-router.put('/post', checkRole, async (req, res,next) => {
+router.put('/post', checkRole, async (req: any, res,next) => {
     try{
         const bookDetails: any = await req.body;
-        console.log(bookDetails);
         const book: any = await DB.Books.CreateBook(bookDetails);
-        console.log({book});
         res.json(book);
     }
     catch (e) {

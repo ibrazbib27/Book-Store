@@ -51,12 +51,9 @@ const BookDetails: React.FC<BookDetailsProps> = (props) => {
     const handleBookSubmission = async () => {
         try{
 
-            const bookInfo: any = book;
-            bookInfo.id =  bookInfo.id.toString();
-            bookInfo.price =  bookInfo.price.toString();
-            bookInfo.categoryid =  bookInfo.categoryid.toString();
+
             const result: any = await json(`/api/books/${props.match.params.id ? `${book.id}/book` : 'post'}`,
-                `${props.match.params.id ? `PUT` : 'POST'}`, bookInfo);
+                `${props.match.params.id ? `PUT` : 'POST'}`, book);
 
             if(result){
                 props.history.replace(props.match.params.id ? `/books/${props.match.params.id}` : '/books');
@@ -147,8 +144,6 @@ const BookDetails: React.FC<BookDetailsProps> = (props) => {
                                     className={'shadow-sm'}
                                     onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                                         e.persist();
-                                        console.log(e.target);
-                                        console.log(book.categoryid);
                                         setBook(prevInfo => ({...prevInfo, categoryid: parseInt(e.target.value)}))
                                         setFormValidations(prevValidations => ({...prevValidations, category: parseInt(e.target.value) === 0}));
                                     }}
