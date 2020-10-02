@@ -50,8 +50,13 @@ const BookDetails: React.FC<BookDetailsProps> = (props) => {
     }
     const handleBookSubmission = async () => {
         try{
-            const result: any = await json(`/api/books/${props.match.params.id ? `${props.match.params.id}/book` : 'post'}`, props.match.params.id ? 'PUT' : 'POST',
-                book );
+
+            const bookInfo: any = book;
+            bookInfo.id =  bookInfo.id.toString();
+            bookInfo.price =  bookInfo.price.toString();
+            bookInfo.categoryid =  bookInfo.categoryid.toString();
+            const result: any = await json(`/api/books/${props.match.params.id ? `${book.id}/book` : 'post'}`,
+                `${props.match.params.id ? `PUT` : 'POST'}`, bookInfo);
 
             if(result){
                 props.history.replace(props.match.params.id ? `/books/${props.match.params.id}` : '/books');
@@ -96,7 +101,7 @@ const BookDetails: React.FC<BookDetailsProps> = (props) => {
                         <Form.Control
                             type="text"
                             defaultValue={book.author}
-                            placeholder="Title"
+                            placeholder="Author"
                             isInvalid={submitted ? formValidations.author : false}
                             className={'shadow-sm'}
                             maxLength={60}
@@ -125,8 +130,8 @@ const BookDetails: React.FC<BookDetailsProps> = (props) => {
                    fixedDecimalScale={true}
                    onValueChange={(values) => {
                        const validation: boolean = isNaN(parseFloat(values.value));
-                       const value: any = validation ? 0 : parseFloat(values.value);
-                       setBook(prevInfo => ({...prevInfo, price: value.toFixed(2)}))
+                       const value: number = validation ? 0.00 : parseFloat(values.value);
+                       setBook(prevInfo => ({...prevInfo, price: value}))
                        setFormValidations(prevValidations => ({...prevValidations, price: validation}));
 
                    }}

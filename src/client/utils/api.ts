@@ -41,11 +41,11 @@ export const json = async <T = any>(
                 headers: header,
             });
         } else {
-            console.log(body)
+            console.log(JSON.stringify(body));
             result = await fetch(uri, {
                 method: methods,
                 headers: header,
-                body: JSON.stringify(body),
+                body: JSON.stringify(body)
             });
         }
 
