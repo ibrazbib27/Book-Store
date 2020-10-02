@@ -1,5 +1,28 @@
-$theme-colors: (
-    'primary': #0091ea //Covalence Blue!  :D
-);
+$xl: 1200px;
+$lg: 992px;
+$md: 768px;
+$sm: 600px;
+
+.bg-color{
+  background-color: #fff3cd;
+}
+
+.width{
+  @media screen and (max-width: $sm){
+    width: 100% !important;
+  }
+  @media screen and (min-width: $sm){
+    width: 75% !important;
+  }
+  @media screen and (min-width: $md){
+    width: 100% !important;
+  }
+  @media screen and (min-width: $lg){
+    width: 100% !important;
+  }
+  @media screen and (min-width: $xl){
+    width: 100% !important;
+  }
+}
 
 @import '../../../node_modules/bootstrap/scss/bootstrap.scss';
