@@ -43,9 +43,9 @@ const App: React.FC<AppProps> = (props) => {
 						render={(props) => (
 							<>
 								<BooksNavbar  history={props.history} location={props.location} match={props.match} />
-								<Container fluid className={'d-flex justify-content-center bg-color min-vh-100'}>
-									<Row className={'justify-content-center align-items-center w-100'}>
-										<Col xl={11} lg={10} md={9} sm={8} xs={7}>
+								<Container fluid className={'d-flex justify-content-center bg-color min-vh-100 p-0'}>
+									<Row className={'justify-content-center align-items-center w-100 p-0 mb-0 mx-0 mt-5'}>
+										<Col xl={7} lg={8} md={9} sm={10} xs={11}>
 										<Account authType={path === '/login'} history={props.history} location={props.location} match={props.match}/>
 										</Col>
 									</Row>

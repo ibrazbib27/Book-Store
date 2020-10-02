@@ -8,6 +8,6 @@ const router = express.Router();
 
 
 router.use('/api', apiRoute);
-router.use('/authRoute', authRoute);
+router.use('/auth', authRoute);
 
 export default router;

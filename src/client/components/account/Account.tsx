@@ -24,7 +24,7 @@ const Account: React.FC<AccountProps> = (props) => {
         e.preventDefault();
         e.stopPropagation();
         try{
-        if((!formValidations.email && !formValidations.password && !formValidations.name)||(props.authType && submitted)) await handleAccountSubmission();
+        if((!formValidations.email && !formValidations.password && !formValidations.name)||(props.authType && submitted && password.length > 0 && email.length > 0)) await handleAccountSubmission();
         else setSubmitted(true);
         }
         catch (e) {
@@ -63,6 +63,11 @@ return(
                             placeholder="Full Name"
                             isInvalid={submitted ? formValidations.name : false}
                             className={'shadow-sm'}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                setName(e.currentTarget.value.trim());
+                                setFormValidations(prevValidations => ({...prevValidations, name: e.currentTarget.value.trim().length === 0}));
+
+                            }}
                         />
                         <Form.Control.Feedback type={'invalid'} className={'text-left'}>{errMessages.name}</Form.Control.Feedback>
                     </Form.Group>
@@ -78,6 +83,12 @@ return(
                         placeholder="Email"
                         isInvalid={submitted ? formValidations.email : false}
                         className={'shadow-sm'}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                            const validate: boolean = props.authType ? e.currentTarget.value.trim().length > 0 : /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(e.currentTarget.value.trim());
+                            setEmail(e.currentTarget.value.trim());
+                            setFormValidations(prevValidations => ({...prevValidations, email: !validate}));
+                            setErrMessages(prevMessage => ({...prevMessage, email: props.authType ? 'Enter your email' : 'Enter a valid email'}));
+                        }}
                     />
                     <Form.Control.Feedback type={'invalid'} className={'text-left'}>{errMessages.email}</Form.Control.Feedback>
                 </Form.Group>
@@ -87,16 +98,22 @@ return(
                     <Form.Label><b>Password</b></Form.Label>
                     <Form.Control
                         required
-                        type="text"
+                        type="password"
                         placeholder={props.authType ? 'Password' : 'At least 6 characters'}
                         isInvalid={submitted ? formValidations.password : false}
                         className={'shadow-sm'}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                            const validate: boolean = props.authType ? e.currentTarget.value.length > 0 :  e.currentTarget.value.length >= 6;
+                            setPassword(e.currentTarget.value);
+                            setFormValidations(prevValidations => ({...prevValidations, password: !validate}));
+                            setErrMessages(prevMessage => ({...prevMessage, password: props.authType ? 'Enter your password' : 'Enter a valid password that is at least 6 character long'}));
+                        }}
                     />
                     <Form.Control.Feedback type={'invalid'} className={'text-left'}>{errMessages.password}</Form.Control.Feedback>
                 </Form.Group>
             </Form.Row>
-            <Form.Row>
-                <Form.Group as={Col} xs={10} className={'justify-content-center'}>
+            <Form.Row className={'justify-content-center'}>
+                <Form.Group as={Col} xs={10}>
             <Button variant={'success'} className={'shadow-sm'} type="submit">{props.authType ? 'Login' : 'Register'}</Button>
         </Form.Group>
     </Form.Row>
