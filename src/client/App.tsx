@@ -5,7 +5,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import BooksNavbar from "./components/books_navbar/BooksNavbar";
 import Account from "./components/account/Account";
-
+import Books from "./components/books/Books";
 export interface bookType{
 id: number;
 title: string;
@@ -30,6 +30,21 @@ const App: React.FC<AppProps> = (props) => {
 								<BooksNavbar  history={props.history} location={props.location} match={props.match} />
 								<Container fluid className={'d-flex align-items-center justify-content-center bg-color min-vh-100'}>
 									<p className={'display-2'}>Welcome!</p>
+								</Container>
+							</>
+						)}
+					/>
+				))}
+				{['/books', '/books/:id'].map((path) => (
+					<Route
+						path={path}
+						exact
+						key={path}
+						render={(props) => (
+							<>
+								<BooksNavbar  history={props.history} location={props.location} match={props.match} />
+								<Container fluid className={'d-flex align-items-center justify-content-center bg-color min-vh-100'}>
+									<Books history={props.history} location={props.location} match={props.match} />
 								</Container>
 							</>
 						)}
