@@ -35,7 +35,7 @@ const App: React.FC<AppProps> = (props) => {
 						)}
 					/>
 				))}
-				{['/books', '/books/:id'].map((path) => (
+				{['/books/new', '/books/:id/update'].map((path) => (
 					<Route
 						path={path}
 						exact
@@ -43,8 +43,27 @@ const App: React.FC<AppProps> = (props) => {
 						render={(props) => (
 							<>
 								<BooksNavbar  history={props.history} location={props.location} match={props.match} />
-								<Container fluid className={'d-flex align-items-center justify-content-center bg-color min-vh-100'}>
-									<Books history={props.history} location={props.location} match={props.match} />
+								<Container fluid className={'d-flex justify-content-center bg-color min-vh-100 p-0'}>
+									<Row className={'justify-content-center align-items-center w-100 p-0 mb-0 mx-0 mt-5'}>
+										<Col xl={7} lg={8} md={9} sm={10} xs={11}>
+											<Account authType={path === '/login'} history={props.history} location={props.location} match={props.match}/>
+										</Col>
+									</Row>
+								</Container>
+							</>
+						)}
+					/>
+				))}
+				{['/books', '/books/:id'].map((path) => (
+					<Route
+						path={path}
+						exact
+						key={path}
+						render={(props) => (
+							<>
+								<BooksNavbar key={path}  history={props.history} location={props.location} match={props.match} />
+								<Container key={path}  fluid className={'d-flex align-items-center justify-content-center bg-color min-vh-100'}>
+									<Books key={path}  history={props.history} location={props.location} match={props.match} />
 								</Container>
 							</>
 						)}

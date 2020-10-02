@@ -12,7 +12,7 @@ interface BookMakerProps extends RouteComponentProps <any> {
 
 const BookMaker: React.FC<BookMakerProps> = (props) => {
 return(
-    <Card key={props.book.id} className={'width bg-primary border border-dark rounded shadow text-white'}>
+    <Card key={props.book.id} className={'width bg-primary border border-dark rounded shadow text-white mx-auto'}>
     <Card.Img variant="top" src='http://www.pngmart.com/files/1/Civil-Engineering-Book-PNG.png' />
     <Card.Body className={'my-1 text-center'}>
         <Card.Title className={'text-monospace mb-1'}>{props.book.title}</Card.Title>
@@ -25,7 +25,7 @@ return(
             <>
                 <Button variant={'danger'} className={'shadow-sm'} onClick={async (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
                     try{
-                        const result: any = await json(`/api/books/${props.match.params.id}/book`, 'DELETE');
+                        const result: any = await json(`/api/books/${props.book.id}/book`, 'DELETE');
                         if(result)
                             props.history.replace('/books');
                     }
@@ -34,13 +34,13 @@ return(
                     }
                 }
                 }>Delete Books</Button>
-                <Link className={'shadow-sm btn btn-secondary'} to={`/books/${props.match.params.id}/update`}>
+                <Link className={'shadow-sm btn btn-secondary'} to={`/books/$props.book.id}/update`}>
                     Update Book
                 </Link>
             </>
             :
             <>
-                <Link className={'shadow-sm btn btn-success'} to={`/books/${props.match.params.id}`}>
+                <Link className={'shadow-sm btn btn-success'} to={`/books/${props.book.id}`}>
                     View Book
                 </Link>
             </>

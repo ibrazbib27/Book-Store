@@ -21,9 +21,20 @@ export const json = async <T = any>(
     try {
         let result: any;
         if (methods === "GET") {
-            result = await fetch(uri,  {
-                method: methods,
-            });
+            let info: any = {};
+            if(uri.includes('categories')) {
+                info = {
+                    method: methods,
+                    headers: header,
+                }
+            }
+            else {
+                info = {
+                    method: methods,
+                }
+            }
+
+            result = await fetch(uri, info);
         } else if (methods === "DELETE") {
             result = await fetch(uri, {
                 method: methods,

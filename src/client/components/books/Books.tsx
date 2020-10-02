@@ -15,7 +15,6 @@ const Books: React.FC<BooksProps> = (props) => {
     useEffect(() => {
         (async () => {
             try{
-                console.log(`/api/books/${props.match.params.id ? `${props.match.params.id }/book` : 'all'}`)
                 const bookArr: any = await json(`/api/books/${props.match.params.id ? `${props.match.params.id }/book` : 'all'}`, 'GET');
                 setBooks([...bookArr]);
             }
