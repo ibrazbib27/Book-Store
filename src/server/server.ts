@@ -15,7 +15,6 @@ app.use(express.json());
 app.use(passport.initialize());
 app.use(express.static('public'));
 app.use(router);
-
 app.use('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/index.html'));
 })

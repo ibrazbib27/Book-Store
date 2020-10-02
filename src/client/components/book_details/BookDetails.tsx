@@ -52,8 +52,8 @@ const BookDetails: React.FC<BookDetailsProps> = (props) => {
         try{
 
 
-            const result: any = await json(`/api/books/${props.match.params.id ? `${book.id}/book` : 'post'}`,
-                `${props.match.params.id ? `PUT` : 'POST'}`, book);
+            const result: any = await json(`/api/books/${props.match.params.id ? `${props.match.params.id}/book` : 'post'}`,
+                props.match.params.id ? 'PUT' : 'POST', book);
 
             if(result){
                 props.history.replace(props.match.params.id ? `/books/${props.match.params.id}` : '/books');

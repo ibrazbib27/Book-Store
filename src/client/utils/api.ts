@@ -41,7 +41,6 @@ export const json = async <T = any>(
                 headers: header,
             });
         } else {
-            console.log(uri);
             result = await fetch(uri, {
                 method: methods,
                 headers: header,
